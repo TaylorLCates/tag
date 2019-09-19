@@ -1,5 +1,7 @@
 package org.improving.tag;
 
+import org.improving.tag.commands.LookCommand;
+
 import java.util.Date;
 import java.util.Scanner;
 
@@ -8,8 +10,6 @@ public class Game {
     private Date startTime;
     private Date endTime;
 
-
-    }
 
     public Date getStartTime() {
         return startTime;
@@ -33,9 +33,10 @@ public class Game {
         boolean loop = true;
         while (loop) {
             System.out.print("> ");
-            String input = scanner.nextLine();
-            if (input.trim().equals("Look")) {
-                System.out.println("You look around.");
+            String input = scanner.nextLine().trim();
+            LookCommand lCmd = new LookCommand();
+            if (lCmd.isValid(input)) {
+                lCmd.execute(input);
             } else if (input.trim().equals("Inventory")) {
                 System.out.println("You are carrying nothing.");
             } else if (input.trim().equals("Dance")) {
