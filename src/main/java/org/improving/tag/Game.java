@@ -4,7 +4,6 @@ import org.improving.tag.commands.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.Scanner;
 
 @Component
 public class Game {
