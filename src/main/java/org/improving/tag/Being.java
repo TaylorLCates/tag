@@ -1,6 +1,6 @@
 package org.improving.tag;
 
-public class Being {
+/*public class Being {
     //Monsters are people too.
     private String profession;
     private int lvl;
@@ -33,4 +33,4 @@ public class Being {
             HP = maxHP;
         }
     }
-}
+} */

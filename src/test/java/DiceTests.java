@@ -1,7 +1,7 @@
 import org.improving.tag.Dice;
 import org.junit.jupiter.api.Test;
 
-public class DiceTests {
+/* public class DiceTests {
 
     Dice target;
 
@@ -10,4 +10,4 @@ public class DiceTests {
     target = new Dice;
 
 
-}
+} */

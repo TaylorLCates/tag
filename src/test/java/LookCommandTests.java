@@ -21,7 +21,7 @@ public class LookCommandTests {
     @Test
     public void execute_should_return_phrase() {
         //Act
-        target.execute(null);
+        target.execute(null, null);
 
         //Assert
         assertEquals("You look around.", io.lastText);
@@ -31,7 +31,7 @@ public class LookCommandTests {
     public void isValid_should_return_true_when_input_is_look() {
 
         //Act
-        var result = target.isValid("look");
+        var result = target.isValid("look", null);
 
         //Assert
         assertTrue(result);
@@ -41,7 +41,7 @@ public class LookCommandTests {
     public void isValid_should_return_true_when_input_is_look_with_spaces() {
 
         //Act
-        var result = target.isValid("     look  ");
+        var result = target.isValid("     look  ", null);
 
         //Assert
         assertTrue(result);
@@ -51,7 +51,7 @@ public class LookCommandTests {
     public void isValid_should_return_true_when_input_is_look_with_caps() {
 
         //Act
-        var result = target.isValid("lOoK");
+        var result = target.isValid("lOoK", null);
 
         //Assert
         assertTrue(result);
@@ -62,7 +62,7 @@ public class LookCommandTests {
 
 
         //Act
-        var result = target.isValid("foobar");
+        var result = target.isValid("foobar", null);
 
         //Assert
         assertFalse(result);
@@ -73,7 +73,7 @@ public class LookCommandTests {
 
 
         //Act
-        var result = target.isValid(null);
+        var result = target.isValid(null, null);
 
         //Assert
         assertFalse(result);
