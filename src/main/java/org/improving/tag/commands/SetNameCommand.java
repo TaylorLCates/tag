@@ -23,7 +23,6 @@ public class SetNameCommand implements Command{
 
 
     }
-
     @Override
     public void execute(String input, Game game) {
         var parts = input.split("=");
