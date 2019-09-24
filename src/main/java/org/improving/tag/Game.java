@@ -12,11 +12,17 @@ public class Game {
     private Date startTime;
     private Date endTime;
     private Player p;
+    private Location startingLocation;
 
     public Game(Command[] commands, InputOutput io) {
+        startingLocation = buildWorld();
         this.commands = commands;
         this.io = io;
-        this.p = new Player();
+        this.p = new Player(startingLocation);
+    }
+
+    public Location getStartingLocation() {
+        return startingLocation;
     }
 
     public Player getPlayer() {
@@ -26,12 +32,15 @@ public class Game {
     public Date getStartTime() {
         return startTime;
     }
+
     private void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
+
     public Date getEndTime() {
         return endTime;
     }
+
     private void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
@@ -61,11 +70,32 @@ public class Game {
 
     private Command getValidCommand(String input) {
         for (Command command : commands) {
-            if(command.isValid(input, this)) {
+            if (command.isValid(input, this)) {
                 return command;
             }
         }
         return null;
     }
 
+    private Location buildWorld() {
+        var tdh = new Location();
+        tdh.setName("The Deathly Hallows");
+
+        var td = new Location();
+        td.setName("The Desert");
+
+        var ta = new Location();
+        ta.setName("The Amazon");
+
+        var tmcs = new Location();
+        tmcs.setName("The Mac and Cheese Shop");
+
+        tdh.getExits().add(new Exit("Heaven Avenue", tmcs, "heaven", "h", "ave"));
+        tdh.getExits().add(new Exit("The Deathly Brownie", td, "brownie", "deathly", "the", "tdb"));
+        td.getExits().add(new Exit("Camel Path", ta, "cp", "camel", "path"));
+        tmcs.getExits().add(new Exit("Highway 121", tmcs, "121", "hwy", "hwy 121", "h121"));
+
+        return tdh;
+    }
 }
+

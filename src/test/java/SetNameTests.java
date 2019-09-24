@@ -21,7 +21,7 @@ public class SetNameTests {
         target = new SetNameCommand(io);
         game = mock(Game.class);
 
-        Player player = new Player();
+        Player player = new Player(null);
         player.setName("hi");
         when(game.getPlayer()).thenReturn(player);
 
@@ -69,14 +69,14 @@ public class SetNameTests {
     }
     @Test
     public void execute_should_trim_spaces() {
-        Player player = new Player();
+        Player player = new Player(null);
         player = spy(player);
         when(game.getPlayer()).thenReturn(player);
         //Act
         target.execute("    @set name=chuck norris          ", game);
         //Assert
-        verify(player).setName(anyString());
-        verify(game, times(2)).getPlayer();
+        verify(player).setName("chuck norris");
+
     }
 
     @Test
