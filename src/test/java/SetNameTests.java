@@ -1,4 +1,5 @@
 import org.improving.tag.Game;
+import org.improving.tag.Player;
 import org.improving.tag.SpringContext;
 import org.improving.tag.commands.SetNameCommand;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,20 +7,24 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class SetNameTests {
     SetNameCommand target;
     TestInputOutput io;
-    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringContext.class);
-
-    Game game = context.getBean(Game.class);
-
+    Game game;
 
     @BeforeEach
     public void arrange() {
         //Arrange
         io = new TestInputOutput();
         target = new SetNameCommand(io);
+        game = mock(Game.class);
+
+        Player player = new Player();
+        player.setName("hi");
+        when(game.getPlayer()).thenReturn(player);
+
     }
 
     @Test
@@ -64,17 +69,23 @@ public class SetNameTests {
     }
     @Test
     public void execute_should_trim_spaces() {
+        Player player = new Player();
+        player = spy(player);
+        when(game.getPlayer()).thenReturn(player);
         //Act
         target.execute("    @set name=chuck norris          ", game);
         //Assert
-        assertEquals("chuck norris", game.getPlayer().getName());
+        verify(player).setName(anyString());
+        verify(game, times(2)).getPlayer();
     }
 
     @Test
     public void isValid_should_ignore_case_for_set_name() {
+
         //Act
         var result = target.isValid("@SeT nAmE=chuck norris", null);
         //Assert
+
         assertTrue(result);
     }
 }
