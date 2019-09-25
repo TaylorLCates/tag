@@ -5,7 +5,6 @@ import org.improving.tag.Game;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public abstract class BaseAliasedCommand implements Command {
 
