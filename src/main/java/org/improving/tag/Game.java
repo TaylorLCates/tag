@@ -121,8 +121,8 @@ public class Game {
         td.getExits().add(new Exit("Camel Path", ta, "cp", "camel", "path"));
         td.getExits().add(new Exit("The Dock", ap, "dock", "td"));
         td.getExits().add(new Exit("The Rocky Road", ict, "Rocky Road", "rr", "rocky", "road"));
-        tmcs.getExits().add(new Exit("Highway 121", ta, "121", "hwy", "hwy 121", "h121"));
-        tmcs.getExits().add(new Exit("Highway 21",tvd, "21", "hwy 21", "highway" ));
+        tmcs.getExits().add(new Exit("Highway 121", ta, "121", "hwy 121", "h121"));
+        tmcs.getExits().add(new Exit("Highway 21",tvd, "21", "hwy 21", "highway 21" ));
         tmcs.getExits().add(new Exit("Paradise Road", tr, "Road", "Paradise Road", "PR"));
         tr.getExits().add(new Exit("The Scenic Route", vm, "the scenic route", "scenic", "route"));
         tr.getExits().add(new Exit("The City Walk", tma, "The city walk", "city walk", "Walk", "city"));
