@@ -1,9 +1,11 @@
 package org.improving.tag;
 
-import org.improving.tag.commands.*;
+import org.improving.tag.commands.Command;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class Game {
@@ -13,6 +15,7 @@ public class Game {
     private Date endTime;
     private Player p;
     private Location startingLocation;
+    private List<Location> locationList = new ArrayList<>();
     private final SaveGameFactory saveFactory;
 
     public Game(Command[] commands, InputOutput io, SaveGameFactory saveFactory) {
@@ -49,7 +52,7 @@ public class Game {
 
 
     public void run() {
-
+        System.out.println();
         this.setStartTime(new Date());
 
         boolean loop = true;
@@ -81,44 +84,58 @@ public class Game {
     }
 
     private Location buildWorld() {
+
+
         var tdh = new Location();
         tdh.setName("The Deathly Hallows");
+        Adversary adversary = new Adversary("Sauron");
+        this.locationList.add(tdh);
 
         var td = new Location();
         td.setName("The Desert");
+        this.locationList.add(td);
 
         var ta = new Location();
         ta.setName("The Amazon");
+        this.locationList.add(ta);
 
         var tmcs = new Location();
         tmcs.setName("The Mac and Cheese Shop");
+        this.locationList.add(tmcs);
 
         var ap = new Location();
         ap.setName("The Airport");
+        this.locationList.add(ap);
 
         var ict = new Location();
         ict.setName("The Ice Cream Truck");
+        this.locationList.add(ict);
 
         var vm = new Location();
         vm.setName("The Velvet Moose");
+        this.locationList.add(vm);
 
         var tmo = new Location();
         tmo.setName("The Mountains");
+        this.locationList.add(tmo);
 
         var tr = new Location();
         tr.setName("The Reef");
+        this.locationList.add(tr);
 
         var tma = new Location();
         tma.setName("The Mall");
+        this.locationList.add(tma);
 
         var md = new Location();
         md.setName("Mount Doom");
+        this.locationList.add(md);
 
         var tvd = new Location();
         tvd.setName("The Volcano of Death");
+        this.locationList.add(tvd);
 
-
-
+        tdh.setAdversary(adversary);
         tdh.getExits().add(new Exit("Heaven Avenue", tmcs, "heaven", "h", "ave"));
         tdh.getExits().add(new Exit("The Deathly Brownie", td, "brownie", "deathly", "the", "tdb"));
         td.getExits().add(new Exit("Camel Path", ta, "cp", "camel", "path"));
@@ -145,6 +162,15 @@ public class Game {
         md.getExits().add(new Exit("The Cab", tma, "The cab", "Cab", "C"));
 
         return tdh;
+    }
+
+    public Location getLocationOf(String intendedLocationName) {
+        for (Location location : locationList) {
+            if (intendedLocationName.equalsIgnoreCase(location.getName())) {
+                return location;
+            }
+        }
+        return null;
     }
 }
 

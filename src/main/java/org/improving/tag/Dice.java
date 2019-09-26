@@ -5,6 +5,10 @@ import java.util.Random;
 public class Dice {
     Random dice = new Random();
 
+    public int getD4() {
+        return d4;
+    }
+
     public int d4 = dice.nextInt(4 + 1 - 1) + 1;
 
     public int d6 = dice.nextInt(6 + 1 - 1) + 1;
@@ -17,4 +21,8 @@ public class Dice {
 
     public int d20 = dice.nextInt(20 + 1 - 1) + 1;
 
+
+
+
 }
+

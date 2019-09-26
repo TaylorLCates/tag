@@ -1,5 +1,6 @@
 package org.improving.tag.commands;
 
+import org.improving.tag.Adversary;
 import org.improving.tag.Exit;
 import org.improving.tag.Game;
 import org.improving.tag.InputOutput;
@@ -8,9 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MoveCommand implements Command {
     private InputOutput io;
+    private Adversary adversary;
 
     public MoveCommand(InputOutput io) {
     this.io = io;
+
 }
     @Override
     public boolean isValid(String input, Game game) {
@@ -44,7 +47,10 @@ public class MoveCommand implements Command {
         if (exit == null) {
             io.displayText("This route is unavailable.");
             return;
-        }
+
+        } else if (game.getPlayer().getLocation().getAdversary() != null) {
+            System.out.println("You shall not pass!"); return;}
+
         game.getPlayer().setLocation(exit.getDestination());
         io.displayText("You travel " + exit.getName() + ".");
     }
