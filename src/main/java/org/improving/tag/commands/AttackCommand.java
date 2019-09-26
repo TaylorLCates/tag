@@ -23,13 +23,13 @@ public class AttackCommand implements Command {
         } else {
             int swing = randomInt.nextInt(100) + 1;
             if (swing <= 20) {
-                game.getPlayer().getLocation().getAdversary().setDamageTaken(game.getPlayer().getLocation().getAdversary().getDamageTaken() + 10);
-                game.getPlayer().getLocation().getAdversary().setHitPoints(game.getPlayer().getLocation().getAdversary().getHitPoints() - 10);
+                game.getPlayer().getLocation().getAdversary().damageCalculation(10);
             } else {
                 System.out.println("Swing and a miss!");
             }
         }
         System.out.println(game.getPlayer().getLocation().getAdversary().getHitPoints());
+        System.out.println(game.getPlayer().getLocation().getAdversary().getDamageTaken());
     }
 }
 

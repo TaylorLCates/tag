@@ -45,5 +45,8 @@ public class Adversary {
         this.attackDamage = attackDamage;
     }
 
-
+    public void damageCalculation(int damageAmount) {
+        hitPoints = hitPoints - damageAmount;
+        damageTaken = damageTaken + damageAmount;
+    }
 }
