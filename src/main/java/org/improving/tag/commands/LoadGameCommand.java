@@ -1,16 +1,19 @@
 package org.improving.tag.commands;
 
 import org.improving.tag.Game;
+import org.improving.tag.InputOutput;
 import org.improving.tag.SaveGameFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LoadGameCommand implements Command {
     private SaveGameFactory saveFactory;
+    private InputOutput io;
 
 
-    public LoadGameCommand(SaveGameFactory saveFactory) {
+    public LoadGameCommand(SaveGameFactory saveFactory, InputOutput io) {
         this.saveFactory = saveFactory;
+        this.io = io;
     }
 
     @Override

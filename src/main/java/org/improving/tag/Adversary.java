@@ -11,6 +11,7 @@ public class Adversary {
         this.damageTaken = 0;
         this.hitPoints = 100;
         this.attackDamage = 1;
+
     }
 
     public String getName() {
@@ -48,5 +49,6 @@ public class Adversary {
     public void damageCalculation(int damageAmount) {
         hitPoints = hitPoints - damageAmount;
         damageTaken = damageTaken + damageAmount;
+        }
     }
-}
+

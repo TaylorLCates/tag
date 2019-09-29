@@ -88,11 +88,12 @@ public class Game {
 
         var tdh = new Location();
         tdh.setName("The Deathly Hallows");
-        Adversary adversary = new Adversary("Sauron");
+        Adversary adversarytdh = new Adversary("Sauron");
         this.locationList.add(tdh);
 
         var td = new Location();
         td.setName("The Desert");
+        Adversary adversarytd = new Adversary("Desert Fox");
         this.locationList.add(td);
 
         var ta = new Location();
@@ -135,9 +136,10 @@ public class Game {
         tvd.setName("The Volcano of Death");
         this.locationList.add(tvd);
 
-        tdh.setAdversary(adversary);
+        tdh.setAdversary(adversarytdh);
         tdh.getExits().add(new Exit("Heaven Avenue", tmcs, "heaven", "h", "ave"));
         tdh.getExits().add(new Exit("The Deathly Brownie", td, "brownie", "deathly", "the", "tdb"));
+        td.setAdversary(adversarytd);
         td.getExits().add(new Exit("Camel Path", ta, "cp", "camel", "path"));
         td.getExits().add(new Exit("The Dock", ap, "dock", "td"));
         td.getExits().add(new Exit("The Rocky Road", ict, "Rocky Road", "rr", "rocky", "road"));

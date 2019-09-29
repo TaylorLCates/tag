@@ -48,8 +48,9 @@ public class MoveCommand implements Command {
             io.displayText("This route is unavailable.");
             return;
 
-        } else if (game.getPlayer().getLocation().getAdversary() != null) {
-            System.out.println("You shall not pass!"); return;}
+        }else if (game.getPlayer().getLocation().getAdversary().getHitPoints() > 1) {
+            System.out.println("You shall not pass!"); return;
+        }
 
         game.getPlayer().setLocation(exit.getDestination());
         io.displayText("You travel " + exit.getName() + ".");
