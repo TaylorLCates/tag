@@ -24,6 +24,9 @@ public class AttackCommand implements Command {
             int swing = randomInt.nextInt(100) + 1;
             if (swing <= 99) {
                 game.getPlayer().getLocation().getAdversary().damageCalculation(10);
+                if (game.getPlayer().getLocation().getAdversary().getHitPoints() <=0){
+                    game.getPlayer().getLocation().setAdversary(null);
+                }
 
             } else {
                 System.out.println("Swing and a miss!");

@@ -22,12 +22,12 @@ public class LookCommand extends BaseAliasedCommand {
         var location = game.getPlayer().getLocation();
         io.displayText(location.getName());
         io.displayText(location.getDescription());
-        io.displayText("");
+        io.displayText(location.getTreasureChest());
+        io.displayNewLine();
         io.displayText("Exits: ");
 
         for (var exit : location.getExits()) {
             io.displayText("  " + exit.getName());
-
         }
     }
 }

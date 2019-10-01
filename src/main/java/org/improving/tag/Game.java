@@ -1,6 +1,7 @@
 package org.improving.tag;
 
 import org.improving.tag.commands.Command;
+import org.improving.tag.items.UniqueItems;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -89,12 +90,13 @@ public class Game {
 
         var tdh = new Location();
         tdh.setName("The Deathly Hallows");
-
+        tdh.setTreasureChest(new TreasureChest(UniqueItems.BLUE_SHELL, "A rainbow box glows with radiance and an italian man lets out a loud yelp in the distance"));
         this.locationList.add(tdh);
 
         var td = new Location();
         td.setName("The Desert");
         Adversary adversarytd = new Adversary("Desert Fox");
+        adversarytd.setHitPoints(50);
         this.locationList.add(td);
 
         var ta = new Location();
@@ -103,6 +105,7 @@ public class Game {
 
         var tmcs = new Location();
         tmcs.setName("The Mac and Cheese Shop");
+        tmcs.setTreasureChest(new TreasureChest(UniqueItems.THE_ONE_RING,"A blue Kraft dinner box rests on the table, pulsing ominously with blue light. You hear a voice saying lowly \"one shell \n to feed them all, one shell to find them, one shell to bring them all and in the cheese, satisfy them!\" "));
         this.locationList.add(tmcs);
 
         var ap = new Location();
@@ -139,9 +142,10 @@ public class Game {
         this.locationList.add(tvd);
 
         md.setAdversary(adversarymd);
+        td.setAdversary(adversarytd);
+
         tdh.getExits().add(new Exit("Heaven Avenue", tmcs, "heaven", "h", "ave"));
         tdh.getExits().add(new Exit("The Deathly Brownie", td, "brownie", "deathly", "the", "tdb"));
-        td.setAdversary(adversarytd);
         td.getExits().add(new Exit("Camel Path", ta, "cp", "camel", "path"));
         td.getExits().add(new Exit("The Dock", ap, "dock", "td"));
         td.getExits().add(new Exit("The Rocky Road", ict, "Rocky Road", "rr", "rocky", "road"));

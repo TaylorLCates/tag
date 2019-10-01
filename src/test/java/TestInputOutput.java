@@ -1,5 +1,4 @@
 import org.improving.tag.InputOutput;
-import org.improving.tag.commands.DanceCommand;
 import org.improving.tag.commands.MoveCommand;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -22,10 +21,13 @@ public class TestInputOutput implements InputOutput {
         return null;
     }
     @Override
-    public void displayText(String text) {
-        this.lastText = text;
+    public void displayText(Object text) {
+        this.lastText = text.toString();
     }
     @Override
     public void displayPrompt(String prompt) {
+    }
+    @Override
+    public void displayNewLine() {
     }
 }

@@ -47,6 +47,12 @@ public class MoveCommand extends BaseAliasedCommand {
             if (exit != null) break;
         }
         if (exit == null) throw new UnsupportedOperationException();
+        if (game.getPlayer().getLocation().getAdversary() != null) {
+            io.displayText("Your way is blocked.");
+
+            return;
+        }
+
 
         game.getPlayer().setLocation(exit.getDestination());
         io.displayText("You travel " + exit.getName() + ".");
