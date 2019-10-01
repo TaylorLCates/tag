@@ -1,11 +1,8 @@
 package org.improving.tag.commands;
 
-import org.improving.tag.Exit;
 import org.improving.tag.Game;
 import org.improving.tag.InputOutput;
 import org.springframework.stereotype.Component;
-
-import javax.tools.StandardLocation;
 
 
 
@@ -14,7 +11,7 @@ public class LookCommand extends BaseAliasedCommand {
     private InputOutput io;
 
     public LookCommand(InputOutput io) {
-        super("look", "whereami", "where am i", "l");
+        super(io, "look", "whereami", "where am i", "l");
         this.io = io;
 
         // super("Look", "You look around.", io);

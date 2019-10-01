@@ -46,7 +46,7 @@ public class Game {
         return endTime;
     }
 
-    private void setEndTime(Date endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
@@ -54,24 +54,25 @@ public class Game {
     public void run() {
         System.out.println();
         this.setStartTime(new Date());
-
         boolean loop = true;
         while (loop) {
-            io.displayPrompt("> ");
-            String input = io.receiveInput();
-            Command validCommand = getValidCommand(input);
+            try {
+                io.displayPrompt("> ");
+                String input = io.receiveInput();
+                Command validCommand = getValidCommand(input);
 
-            if (null != validCommand) {
-                validCommand.execute(input, this);
-            } else if (input.trim().equalsIgnoreCase("Exit")) {
-                io.displayText("Goodbye.");
-                saveFactory.save(this);
+                if (null != validCommand) {
+                    validCommand.execute(input, this);
+                } else {
+                    io.displayText("Huh? I don't understand.");
+                }
+            } catch (GameExitException ex) {
                 loop = false;
-            } else {
-                io.displayText("Huh? I don't understand.");
             }
+
         }
         this.setEndTime(new Date());
+
     }
 
     private Command getValidCommand(String input) {
@@ -88,7 +89,7 @@ public class Game {
 
         var tdh = new Location();
         tdh.setName("The Deathly Hallows");
-        Adversary adversarytdh = new Adversary("Sauron");
+
         this.locationList.add(tdh);
 
         var td = new Location();
@@ -130,13 +131,14 @@ public class Game {
 
         var md = new Location();
         md.setName("Mount Doom");
+        Adversary adversarymd = new Adversary("Sauron");
         this.locationList.add(md);
 
         var tvd = new Location();
         tvd.setName("The Volcano of Death");
         this.locationList.add(tvd);
 
-        tdh.setAdversary(adversarytdh);
+        md.setAdversary(adversarymd);
         tdh.getExits().add(new Exit("Heaven Avenue", tmcs, "heaven", "h", "ave"));
         tdh.getExits().add(new Exit("The Deathly Brownie", td, "brownie", "deathly", "the", "tdb"));
         td.setAdversary(adversarytd);
@@ -144,7 +146,7 @@ public class Game {
         td.getExits().add(new Exit("The Dock", ap, "dock", "td"));
         td.getExits().add(new Exit("The Rocky Road", ict, "Rocky Road", "rr", "rocky", "road"));
         tmcs.getExits().add(new Exit("Highway 121", ta, "121", "hwy 121", "h121"));
-        tmcs.getExits().add(new Exit("Highway 21",tvd, "21", "hwy 21", "highway 21" ));
+        tmcs.getExits().add(new Exit("Highway 21", tvd, "21", "hwy 21", "highway 21"));
         tmcs.getExits().add(new Exit("Paradise Road", tr, "Road", "Paradise Road", "PR"));
         tr.getExits().add(new Exit("The Scenic Route", vm, "the scenic route", "scenic", "route"));
         tr.getExits().add(new Exit("The City Walk", tma, "The city walk", "city walk", "Walk", "city"));
@@ -160,7 +162,7 @@ public class Game {
         ap.getExits().add(new Exit("Flight to the Mall", tma, "Flight to the Mall", "FtM", "Flight", "Mall"));
         vm.getExits().add(new Exit("The Pudding Slide", ta, "The pudding slide", "Pudding", "Slide", "Pudding slide"));
         vm.getExits().add(new Exit("The Front Door", ta, "The front door", "Front", "Door", "fd"));
-        tr.getExits().add(new Exit("The Amaz-ing Moose", vm, "The amaz-ing moose", "amaz-ing moose" ,"amazing moose" ,"amaz-ing", "moose", "am"));
+        tr.getExits().add(new Exit("The Amaz-ing Moose", vm, "The amaz-ing moose", "amaz-ing moose", "amazing moose", "amaz-ing", "moose", "am"));
         md.getExits().add(new Exit("The Cab", tma, "The cab", "Cab", "C"));
 
         return tdh;

@@ -10,11 +10,12 @@ public class Main {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringContext.class);
 
       Game game = context.getBean(Game.class);
-      game.run();
+         game.run();
 
-      long elapsedTicks =  game.getEndTime().getTime() -
-                      game.getStartTime().getTime();
-      double elapsedSeconds = elapsedTicks / 1000.0;
-      System.out.println("We were running for " + elapsedSeconds + "s.");
+         long elapsedTicks = game.getEndTime().getTime() -
+                 game.getStartTime().getTime();
+         double elapsedSeconds = elapsedTicks / 1000.0;
+         System.out.println("We were running for " + elapsedSeconds + "s.");
+
     }
 }

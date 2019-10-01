@@ -1,34 +1,36 @@
 package org.improving.tag.commands;
 
-import org.improving.tag.Adversary;
 import org.improving.tag.Exit;
 import org.improving.tag.Game;
 import org.improving.tag.InputOutput;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MoveCommand implements Command {
+public class MoveCommand extends BaseAliasedCommand {
     private InputOutput io;
-    private Adversary adversary;
+
 
     public MoveCommand(InputOutput io) {
-    this.io = io;
-
+    super(io,"Move", "mo", "M", "mov");
+        this.io = io;
 }
-    @Override
-    public boolean isValid(String input, Game game) {
-        if (input == null) return false;
-        input = input.trim();
-        var parts = input.split(" ");
-        if (parts.length == 1) return false;
-        return parts[0].equalsIgnoreCase("move");
 
+    @Override
+    public String getCommandPart(String input) {
+        var parts = input.split(" ");
+        if (parts.length == 1) throw new UnsupportedOperationException();
+        return parts[0];
+}
+
+    @Override
+    public String getErrorMessage() {
+        return "That route is unavailable.";
     }
 
     @Override
-    public void execute(String input, Game game) {
+    public void childExecute(String input, Game game) {
         input = input.trim();
-        var destination = input.substring(5);
+        var destination = input.substring(input.indexOf(" ") + 1);
 
         Exit exit = null;
         for (var e : game.getPlayer().getLocation().getExits()) {
@@ -44,13 +46,7 @@ public class MoveCommand implements Command {
             }
             if (exit != null) break;
         }
-        if (exit == null) {
-            io.displayText("This route is unavailable.");
-            return;
-
-        }else if (game.getPlayer().getLocation().getAdversary().getHitPoints() > 1) {
-            System.out.println("You shall not pass!"); return;
-        }
+        if (exit == null) throw new UnsupportedOperationException();
 
         game.getPlayer().setLocation(exit.getDestination());
         io.displayText("You travel " + exit.getName() + ".");
