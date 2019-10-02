@@ -57,6 +57,7 @@ public class Location {
     public TreasureChest getTreasureChest() {
         return treasureChest;
     }
+
     public Item openTreasureChest() {
         if (treasureChest.NO_TREASURE.equals(treasureChest)) {
             throw new UnsupportedOperationException();
@@ -64,6 +65,15 @@ public class Location {
         Item treasure = treasureChest.getItem();
         treasureChest = TreasureChest.NO_TREASURE;
         return treasure;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Location) {
+            Location location = (Location) obj;
+            return this.getName().equals(location.getName());
+        }
+        return super.equals(obj);
     }
 }
 

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.improving.tag.items.UniqueItems.FOX_EAR;
+
 @Component
 public class Game {
     private Command[] commands;
@@ -95,8 +97,7 @@ public class Game {
 
         var td = new Location();
         td.setName("The Desert");
-        Adversary adversarytd = new Adversary("Desert Fox");
-        adversarytd.setHitPoints(50);
+        Adversary adversarytd = new Adversary("Desert Fox", 50, FOX_EAR);
         this.locationList.add(td);
 
         var ta = new Location();
@@ -134,7 +135,7 @@ public class Game {
 
         var md = new Location();
         md.setName("Mount Doom");
-        Adversary adversarymd = new Adversary("Sauron");
+        Adversary adversarymd = new Adversary("Sauron", 100, null);
         this.locationList.add(md);
 
         var tvd = new Location();
