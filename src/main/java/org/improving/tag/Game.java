@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.improving.tag.items.UniqueItems.FOX_EAR;
 
@@ -55,7 +56,6 @@ public class Game {
 
 
     public void run() {
-        System.out.println();
         this.setStartTime(new Date());
         boolean loop = true;
         while (loop) {
@@ -79,13 +79,14 @@ public class Game {
     }
 
     private Command getValidCommand(String input) {
-        for (Command command : commands) {
-            if (command.isValid(input, this)) {
-                return command;
-            }
+       // for (Command command : commands) {
+         //   if (command.isValid(input, this))
+
+
+                return Stream.of(commands).filter(c -> c.isValid(input, this)).findFirst().orElse(null);
+
         }
-        return null;
-    }
+
 
     private Location buildWorld() {
 

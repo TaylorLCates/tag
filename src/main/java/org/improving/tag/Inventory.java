@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
-
+    private InputOutput io;
     private final List<Item> items = new ArrayList();
 
     public Inventory() {
@@ -26,11 +26,12 @@ public class Inventory {
     }
 
     public String getInventoryDisplay() {
-        String displayString = "You have the following items in your inventory: ";
-        items.sort(new ItemComparator());
-        for (Item item :
-                items) {
-            displayString += "\n" + item;
-        } return displayString;
+        String displayString = "You have these items: ";
+//        items.sort(new ItemComparator());
+//        items.stream().sorted().forEach(item -> System.out.println(item.getName()));
+//        return displayString;
+
+        return items.stream().sorted(new ItemComparator()).map(i -> "/n" + i)
+                .reduce(displayString, (answer, itemValue) -> answer+= itemValue);
     }
 }
