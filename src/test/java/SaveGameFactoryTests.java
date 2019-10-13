@@ -9,9 +9,13 @@ import org.mockito.ArgumentCaptor;
 import java.io.IOException;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class SaveGameFactoryTests {
 
@@ -25,7 +29,7 @@ public class SaveGameFactoryTests {
         io = new TestInputOutput();
         fsa = mock(FileSystemAdapter.class);
         target = new SaveGameFactory(fsa, io);
-        g = new Game(null, io, target, new WorldBuilder());
+        g = new Game(null, io, target, new WorldBuilder(null, null));
     }
 
    @Test

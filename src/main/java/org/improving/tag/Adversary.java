@@ -3,13 +3,14 @@ package org.improving.tag;
 import org.improving.tag.items.Item;
 
 public class Adversary {
+    private int id;
     private String name;
     private int hitPoints;
     private int damageTaken;
     private int attackDamage;
     private Item item;
 
-    public Adversary(String name, int hitPoints, Item item) {
+    public Adversary(/*String name, int hitPoints, Item item*/) {
         this.name = name;
         this.damageTaken = 0;
         this.attackDamage = 1;
