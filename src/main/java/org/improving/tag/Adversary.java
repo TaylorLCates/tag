@@ -1,14 +1,40 @@
 package org.improving.tag;
 
 import org.improving.tag.items.Item;
+import org.improving.tag.items.UniqueItems;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.PostLoad;
+import javax.persistence.Transient;
+import java.util.Arrays;
+
+@Entity( name = "adversary")
 public class Adversary {
-    private int id;
+    @Id
+    long id;
+    @Column(name = "Name")
     private String name;
+    @Column(name = "hitPoints")
     private int hitPoints;
+    @Column(name = "DamageTaken")
     private int damageTaken;
+    @Column(name = "AttackDamage")
     private int attackDamage;
-    private Item item;
+    @Column(name = "DropItem")
+    private String dropItemDb;
+
+    @Transient
+    private Item item = UniqueItems.NOTHING;
+
+    public String getDropItemDb() {
+        return dropItemDb;
+    }
+
+    public void setDropItemDb(String dropItemDb) {
+        this.dropItemDb = dropItemDb;
+    }
 
     public Adversary(/*String name, int hitPoints, Item item*/) {
         this.name = name;
@@ -53,7 +79,7 @@ public class Adversary {
     public void damageCalculation(int damageAmount) {
         hitPoints = hitPoints - damageAmount;
         damageTaken = damageTaken + damageAmount;
-        }
+    }
 
     public Item getItem() {
         return item;
@@ -61,6 +87,13 @@ public class Adversary {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    @PostLoad
+    public void postLoad() {
+        if (null != dropItemDb) {
+            this.setItem(Arrays.stream(UniqueItems.values()).filter(item -> item.getName().equals(dropItemDb)).findFirst().orElse(null));
+        }
     }
 }
 

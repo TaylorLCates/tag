@@ -2,12 +2,11 @@ package org.improving.tag.database;
 
 import org.improving.tag.Adversary;
 import org.improving.tag.Location;
-import org.improving.tag.items.UniqueItems;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Component
@@ -25,16 +24,11 @@ public class LocationDAO {
                 location.setId(result.getInt("LocId"));
                 location.setName(result.getString("LocName"));
                 location.setDescription("Description");
-                Integer adversaryId = result.getInt("AdversaryId");
-                if (adversaryId != null) {
-                    Adversary adversary = new Adversary();
-                    adversary.setName(result.getString("AdvName"));
-                    adversary.setHitPoints(result.getInt("HitPoints"));
-                    adversary.setDamageTaken(result.getInt("DamageTaken"));
-                    String dropItem = result.getString("DropItem");
-                    if (null != dropItem) {
-                        adversary.setItem(Arrays.stream(UniqueItems.values()).filter(item -> item.getName().equals(dropItem)).findFirst().orElse(null));
-                    }
+
+
+                if (result.getString("AdversaryId") != null){
+                    EntityManager em = JPAUtility.getEntityManager();
+                   Adversary adversary = em.find(Adversary.class, Long.parseLong(result.getString("AdversaryId")));
                     location.setAdversary(adversary);
                 }
                 return location;
