@@ -36,7 +36,7 @@ public class Adversary {
         this.dropItemDb = dropItemDb;
     }
 
-    public Adversary(/*String name, int hitPoints, Item item*/) {
+    public Adversary() {
         this.name = name;
         this.damageTaken = 0;
         this.attackDamage = 1;

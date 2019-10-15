@@ -18,21 +18,23 @@ public class LocationDAO {
     }
 
     public List<Location> findAll() {
-        try {
-            List<Location> locations = jdbcTemplate.query("SELECT l.Id as LocId, l.Name as LocName, l.Description, l.AdversaryId, a.Id as AdvId, a.Name as AdvName, a.HitPoints, a.DamageTaken, a.AttackDamage, a.DropItem FROM location l LEFT JOIN adversary a ON l.AdversaryId = a.Id", (result, rowNum) -> {
-                Location location = new Location();
+        try { EntityManager ema = JPAUtility.getEntityManager();
+            List<Location> locations = ema.createQuery("SELECT loc FROM org.improving.tag.Location loc").getResultList();
+                for (Location location:locations) {
+           /* List<Location> locations = jdbcTemplate.query("SELECT l.Id as LocId, l.Name as LocName, l.Description, l.AdversaryId," +
+                    " a.Id as AdvId, a.Name as AdvName, a.HitPoints, a.DamageTaken, a.AttackDamage, a.DropItem FROM location " +
+                    "l LEFT JOIN adversary a ON l.AdversaryId = a.Id", (result, rowNum) -> {
+                Location location =
                 location.setId(result.getInt("LocId"));
                 location.setName(result.getString("LocName"));
                 location.setDescription("Description");
-
-
-                if (result.getString("AdversaryId") != null){
+*/
+                if (location.getAdversaryIdDB() != null){
                     EntityManager em = JPAUtility.getEntityManager();
-                   Adversary adversary = em.find(Adversary.class, Long.parseLong(result.getString("AdversaryId")));
+                   Adversary adversary = em.find(Adversary.class, location.getAdversaryIdDB());
                     location.setAdversary(adversary);
                 }
-                return location;
-            });
+            }
             return locations;
         } catch (DataAccessException e) {
             System.out.println("Exception in JDBC: " + e.getMessage());
@@ -40,3 +42,4 @@ public class LocationDAO {
         }
     }
 }
+

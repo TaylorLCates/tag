@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Exit {
+
     private String name;
     private Location destination;
     private List<String> aliases = new ArrayList<>();

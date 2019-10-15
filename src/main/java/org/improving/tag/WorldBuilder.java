@@ -34,7 +34,7 @@ public class WorldBuilder {
                 });
             }
             locationList = locations;
-            return locationList.get(0);
+            return locationList.get(2);
         } catch (Exception e) {
             return buildHardCodedWorld();
         }
