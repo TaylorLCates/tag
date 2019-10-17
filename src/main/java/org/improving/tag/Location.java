@@ -4,35 +4,39 @@ import org.improving.tag.items.Item;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 @Entity(name = "location")
 public class Location {
+
     @Id
     private int id;
     @Column(name = "Name")
     private String name = "";
     @Column(name = "Description")
     private String description = "";
-    @Transient
+    @OneToMany(mappedBy = "origin")
     private List<Exit> exits = new ArrayList<>();
-    @Transient
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "AdversaryId")
     private Adversary adversary;
-    @Column(name = "AdversaryId")
-    private Long adversaryIdDB;
     @Transient
     private TreasureChest treasureChest = TreasureChest.NO_TREASURE;
 
-
-    public Long getAdversaryIdDB() {
-        return adversaryIdDB;
-    }
-
-    public void setAdversaryIdDB(Long adversaryIdDB) {
-        this.adversaryIdDB = adversaryIdDB;
-    }
+//
+//    public Long getAdversaryIdDB() {
+//        return adversaryIdDB;
+//    }
+//
+//    public void setAdversaryIdDB(Long adversaryIdDB) {
+//        this.adversaryIdDB = adversaryIdDB;
+//    }
 
     public int getId() {
         return id;

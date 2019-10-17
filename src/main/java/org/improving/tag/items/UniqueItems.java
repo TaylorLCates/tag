@@ -22,6 +22,18 @@ public enum UniqueItems implements Item {
     private String description;
     private String name;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     UniqueItems(String name, String description) {
         this.description = description;
         this.name = name;
