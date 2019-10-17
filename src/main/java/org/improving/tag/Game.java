@@ -3,7 +3,6 @@ package org.improving.tag;
 import org.improving.tag.commands.Command;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
@@ -17,7 +16,7 @@ public class Game {
     private Player p;
     private Location startingLocation;
     private final SaveGameFactory saveFactory;
-    private List<Location> locationList = new ArrayList<>();
+    private List<Location> locationList;
 
     public Game(Command[] commands, InputOutput io, SaveGameFactory saveFactory, WorldBuilder worldBuilder) {
         startingLocation = worldBuilder.buildWorld();
@@ -26,10 +25,6 @@ public class Game {
         this.io = io;
         this.p = new Player(startingLocation);
         this.saveFactory = saveFactory;
-    }
-
-    public Location getStartingLocation() {
-        return startingLocation;
     }
 
     public Player getPlayer() {
@@ -84,8 +79,6 @@ public class Game {
     }
 
     private Command getValidCommand(String input) {
-       // for (Command command : commands) {
-         //   if (command.isValid(input, this))
         return Stream.of(commands).filter(c -> c.isValid(input, this)).findFirst().orElse(null);
         }
 }

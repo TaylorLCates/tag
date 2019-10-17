@@ -6,7 +6,6 @@ import org.improving.tag.items.UniqueItems;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 
 @Entity( name = "adversary")
@@ -88,10 +87,10 @@ public class Adversary {
         this.item= item;
     }
 
-    @PostLoad
-    public void postLoad() {
-        System.out.println("Item is: " + item);
-    }
+//    @PostLoad
+//    public void postLoad() {
+//        System.out.println("Item is: " + item);
+//    }
 
 }
 

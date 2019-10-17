@@ -13,10 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 @Entity(name = "exits")
 public class Exit {
+
     @Column(name = "Name")
     private String name;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "DestinationId")
     private Location destination;
 
@@ -29,9 +30,6 @@ public class Exit {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "OriginId")
     private Location origin;
-
-//    @Column(name = "Aliases")
-//    private String aliasesDB;
 
     public Exit() {
 

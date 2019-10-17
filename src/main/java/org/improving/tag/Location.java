@@ -16,33 +16,29 @@ import java.util.List;
 public class Location {
 
     @Id
-    private int id;
+    private Long id;
+
     @Column(name = "Name")
     private String name = "";
+
     @Column(name = "Description")
     private String description = "";
-    @OneToMany(mappedBy = "origin")
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "origin")
     private List<Exit> exits = new ArrayList<>();
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @ManyToOne
     @JoinColumn(name = "AdversaryId")
     private Adversary adversary;
+
     @Transient
     private TreasureChest treasureChest = TreasureChest.NO_TREASURE;
 
-//
-//    public Long getAdversaryIdDB() {
-//        return adversaryIdDB;
-//    }
-//
-//    public void setAdversaryIdDB(Long adversaryIdDB) {
-//        this.adversaryIdDB = adversaryIdDB;
-//    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -107,9 +103,6 @@ public class Location {
     public void addExit(Exit exit) {
         this.exits.add(exit);
     }
-
-    //public void addExit(Exit exit) {
-       // this.exit = exit;
-    }
+}
 
 

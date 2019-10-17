@@ -1,39 +1,27 @@
 package org.improving.tag;
 
-import org.improving.tag.database.ExitDAO;
-import org.improving.tag.database.LocationDAO;
+import org.improving.tag.database.ExitRepository;
+import org.improving.tag.database.LocationRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class WorldBuilder {
-    private List<Location> locationList = new ArrayList<>();
-    private final LocationDAO locationDAO;
-    private final ExitDAO exitDAO;
+    public LocationRepository locationRepository;
+    public ExitRepository exitRepository;
+    private List<Location> locationList;
 
-    public WorldBuilder(LocationDAO locationDAO, ExitDAO exitDAO) {
-        this.locationDAO = locationDAO;
-        this.exitDAO = exitDAO;
+    public WorldBuilder(LocationRepository locationRepository, ExitRepository exitRepository) {
+        this.locationRepository = locationRepository;
+        this.exitRepository = exitRepository;
     }
+
 
     public Location buildWorld() {
           try {
-            List<Location> locations = locationDAO.findAll();
-//            List<Exit> exits = exitDAO.findAllExit();
-//            for (Location location : locations) {
-//                List<Exit> exits = exitDAO.findAllExit(location.getId());
-//                exits.forEach(exit -> {
-//                    Location destination = locations.stream()
-//                            .filter(locat -> locat.getId() == exit.getDestinationId())
-//                            .findFirst()
-//                            .orElse(null);
-//                    exit.setDestination(destination);
-//                    location.addExit(exit);
-//                });
-//            }
-//            locationList = locations;
+            List<Location> locations = locationRepository.findAllByOrderByName();
+
             return locations.get(2);
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,7 +31,7 @@ public class WorldBuilder {
 
 
         public List<Location> getLocationList () {
-            return locationList;
+           return locationList;
         }
     }
 
